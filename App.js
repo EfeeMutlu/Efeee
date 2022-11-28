@@ -1,60 +1,55 @@
-import React, { useState } from "react";
-import { Text, SafeAreaView, View, TextInput, TouchableOpacity, FlatList, ImageBackground, Image } from "react-native";
-import { _taskHandle } from "react-native/Libraries/Interaction/Batchinator";
-import { appStyles, appStyles as styles } from "./styles";
+import React from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Button,
+  ImageBackground,
+} from 'react-native';
 
+import Router from './src/Router';
+//import bgImage from './bg.jpg';
 
-function App() {
-  const [text, setText] = useState("");
+const App=() => {
+    return (
+        <Router/>
+       /* <ImageBackground source={bgImage} style={styles.container}>
+          <TouchableOpacity style={styles.toucStyle}
+            onPress={() => alert('tıkladın')}>
+              <Text>---</Text>
+          </TouchableOpacity>
+         <TouchableOpacity style={styles.toucStyle}
+         onPress={() => alert ('kaşmerler ')}>
+         <Image 
+         source={require('./buton2.png')}
+         resizeMode='center'
+         />
+         </TouchableOpacity>
+        </ImageBackground>*/
+    );
+};
+const styles = StyleSheet.create({
+  container : {
+    flex: 1,
+    backgroundColor: 'gray',
+   /* alignItems:'center',
+    justifyContent:'center'*/
+  },
 
-  const [tasks, setTasks] = useState([]);
-
-  const handleAddTaskPress = () => {
-    setTasks([...tasks, text]);
-    setText("");
-  };
-
-  const handleDeleteTaskPress = (index) => {
-    const newTasks = [...tasks];
-    newTasks.splice(index, 1);
-    setTasks(newTasks);
-  };
-
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        {/* <Image source={require('./header.png')} style={styles.header} /> */}
-        <Text style={styles.title}>Yapılacaklar</Text>
-        {/* <Text style={styles.subtitle}>Yapılacak şeyleri buraya gir</Text> */}
-        <TextInput style={styles.input}
-          placeholder="Lütfen bir plan giriniz"
-          value={text}
-          onChangeText={setText}
-        />
-        <TouchableOpacity style={styles.buttonContainer}
-          onPress={handleAddTaskPress}
-        >
-          <Text style={styles.buttonText}>Gönder</Text>
-        </TouchableOpacity>
-
-        <View style={styles.divider} />
-
-        <FlatList data={tasks}
-          renderItem={({ item, index }) => (
-            <View style={styles.taskContainer}>
-              <Text style={styles.taskText}>{item}</Text>
-              <TouchableOpacity style={styles.taskDelete} onPress={() => handleDeleteTaskPress(index)}>
-                <Text style={styles.taskDeleteText}>X</Text>
-              </TouchableOpacity>
-
-            </View>
-          )}
-          keyExtractor={(item) => + Date.now() + Math.random()}
-        />
-      </View>
-    </SafeAreaView>
-  );
-}
-
+  /*toucStyle:{
+    width:100,
+    height:30,
+    //backgroundColor:'orange',
+    marginTop:20,
+    opacity:0.9,
+    justifyContent:'center',
+    alignItems:'center'
+  }*/
+});
 
 export default App;
